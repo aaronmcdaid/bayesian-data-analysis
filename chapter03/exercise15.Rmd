@@ -143,6 +143,8 @@ where
 $$
 \begin{align}
         \mu_1 & = \frac{ \frac1{\tau_0^2}\mu_0 + \frac1{\sigma^2}y }{ \frac1{\tau_0^2} + \frac1{\sigma^2} }
-\\      \frac1{\tau_1^2} & = \frac1{\tau_0^2} + \frac1{\sigma^2}
+\\      \frac1{\tau_1^2} & = \frac1{\tau_0^2} + \frac1{\sigma^2} = 1 + 0.8^2 \Rightarrow x = y
+\\      \mu_1 & = \frac{ 0.8y_{t-1} +  0.8y_t}{1+0.8^2}
+\\      \tau_1^2 & = \frac1{1 + 0.8^2}
 \end{align}
 $$
