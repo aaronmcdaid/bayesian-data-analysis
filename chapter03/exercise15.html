@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Aaron McDaid - aaron.mcdaid@gmail.com" />
+<meta name="author" content="Aaron McDaid (with important help from others!) - aaron.mcdaid@gmail.com" />
 
 
 <title>Chapter 3 - Exercise 15</title>
@@ -185,7 +185,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Chapter 3 - Exercise 15</h1>
-<h4 class="author"><em>Aaron McDaid - <a href="mailto:aaron.mcdaid@gmail.com">aaron.mcdaid@gmail.com</a></em></h4>
+<h4 class="author"><em>Aaron McDaid (with important help from others!) - <a href="mailto:aaron.mcdaid@gmail.com">aaron.mcdaid@gmail.com</a></em></h4>
 <h4 class="date"><em>2 May 2019</em></h4>
 
 </div>
@@ -248,7 +248,28 @@ $(document).ready(function () {
 </div>
 <div id="part-b" class="section level3">
 <h3>part (b)</h3>
-<p>For part b, I think we can model <span class="math inline">\((y_{t+1}, y_t)\)</span> as a bivariate normal, parameterized in terms of <span class="math inline">\(y_{t-1}\)</span>, and use equation 3.14). TODO: part b!</p>
+<p>The denominator in that equation is not a function of <span class="math inline">\(y_t\)</span>; in other words it is constant in terms of <span class="math inline">\(y_t\)</span>. Therefore the conditional density of <span class="math inline">\(y_t|\cdot\)</span> is proportional to the numerator: <span class="math display">\[
+    \PP{y_t | y_{t-1}, y_{t+1}} \propto \NN{y_t|0.8 y_{t-1}, 1} \NN{y_{t+1}|0.8 y_t, 1}
+\]</span></p>
+<p>This is a posterior density, where <span class="math inline">\(y_t\)</span> has a prior <span class="math inline">\(y_t \sim \NN{0.8y_{t-1},1}\)</span> and <span class="math inline">\(y_{t+1}\)</span> is observed data with likelihood <span class="math inline">\(y_{t+1} \sim \NN{0.8y_t, 1}\)</span>. The likelihood can be rewritten as <span class="math inline">\(y_t \sim \NN{\frac1{0.8}y_{t+1} , \frac1{0.8^2}}\)</span>.</p>
+<p>Following equation 2.10 from the book, we have</p>
+<p><span class="math display">\[
+\begin{align}
+        \mu_0 &amp; = 0.8y_{t-1}
+\\      \tau_0^2 &amp; = 1
+\\      y &amp; = \frac1{0.8}y_t
+\\      \sigma^2 &amp; = \frac1{0.8^2}
+\end{align}
+\]</span></p>
+<p>with the final distribution, <span class="math inline">\(y_t|\cdot\)</span> begin:</p>
+<p><span class="math display">\[
+y_t|\cdot \sim \NN{\mu_1, \tau_1^2}
+\]</span> where <span class="math display">\[
+\begin{align}
+        \mu_1 &amp; = \frac{ \frac1{\tau_0^2}\mu_0 + \frac1{\sigma^2}y }{ \frac1{\tau_0^2} + \frac1{\sigma^2} }
+\\      \frac1{\tau_1^2} &amp; = \frac1{\tau_0^2} + \frac1{\sigma^2}
+\end{align}
+\]</span></p>
 </div>
 
 

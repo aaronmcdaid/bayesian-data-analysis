@@ -1,6 +1,6 @@
 ---
 title: "Chapter 3 - Exercise 15"
-author: "Aaron McDaid - aaron.mcdaid@gmail.com"
+author: "Aaron McDaid (with important help from others!) - aaron.mcdaid@gmail.com"
 date: "2 May 2019"
 output: html_document
 ---
@@ -110,8 +110,39 @@ $$
 That final expression includes terms for $y_{t+1}$, $y_t$ and $y_{t-1}$, but nothing else.
 Therefore part (a) is shown.
 
+
 ### part (b)
 
-For part b, I think we can model $(y_{t+1}, y_t)$ as a bivariate normal,
-parameterized in terms of $y_{t-1}$, and use  equation 3.14).
-TODO: part b!
+The denominator in that equation is not a function of $y_t$; in other words it is constant in terms of $y_t$.
+Therefore the conditional density of $y_t|\cdot$ is proportional to the numerator:
+$$
+	\PP{y_t | y_{t-1}, y_{t+1}} \propto \NN{y_t|0.8 y_{t-1}, 1} \NN{y_{t+1}|0.8 y_t, 1}
+$$
+
+This is a posterior density, where $y_t$ has a prior $y_t \sim \NN{0.8y_{t-1},1}$ and $y_{t+1}$ is observed data
+with likelihood $y_{t+1} \sim \NN{0.8y_t, 1}$.
+The likelihood can be rewritten as $y_t \sim \NN{\frac1{0.8}y_{t+1} , \frac1{0.8^2}}$.
+
+Following equation 2.10 from the book, we have
+
+$$
+\begin{align}
+        \mu_0 & = 0.8y_{t-1}
+\\      \tau_0^2 & = 1
+\\      y & = \frac1{0.8}y_t
+\\      \sigma^2 & = \frac1{0.8^2}
+\end{align}
+$$
+
+with the final distribution, $y_t|\cdot$ begin:
+
+$$
+y_t|\cdot \sim \NN{\mu_1, \tau_1^2}
+$$
+where
+$$
+\begin{align}
+        \mu_1 & = \frac{ \frac1{\tau_0^2}\mu_0 + \frac1{\sigma^2}y }{ \frac1{\tau_0^2} + \frac1{\sigma^2} }
+\\      \frac1{\tau_1^2} & = \frac1{\tau_0^2} + \frac1{\sigma^2}
+\end{align}
+$$
